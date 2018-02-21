@@ -1,7 +1,7 @@
-# -*- coding: utf-8 -*-
+ #-*- coding: utf-8 -*-
 from chatterbot import ChatBot
-from chatterbot.trainers import ChatterBotCorpusTrainer
-# from chatterbot.trainers import ListTrainer
+#from chatterbot.trainers import ChatterBotCorpusTrainer
+from chatterbot.trainers import ListTrainer
 
 
 
@@ -18,14 +18,21 @@ bot = ChatBot(
     output_adapter="chatterbot.output.TerminalAdapter",
     database="../database.db"
 )
-bot.set_trainer(ChatterBotCorpusTrainer)
-# print("Type something to begin...")
-# conversation = open('conversations/me.yml','r').readlines()
-#print(conversation)
+# bot.set_trainer(ChatterBotCorpusTrainer)
+# # print("Type something to begin...")
+#
+# bot.train(
+#     #"chatterbot.corpus.english.testing"
+#     "./data/testing.yml",
+# )
 
-bot.train(
-    "chatterbot.corpus.english.me"
-)
+bot.set_trainer(ListTrainer)
+#
+bot.train([
+    "how old are you",
+    "<p><img src='messages/stickers/369239263222822.png' />",
+])
+
 
 # The following loop will execute each time the user enters input
 while True:
