@@ -1,5 +1,7 @@
-# ok-nouf
+# Nouf.io
 
-Ok Nouf is a chatbot that will answer calls and act as a copy of my digital self. She will be simulated from my online archives such as social media posts, Facebook messages, SMS interactions and more. She will be a hotline, my companion and a self-reflection bot whose answers I can analyze to get a better picture of myself. 
+How well does our behaviour online reflect who we really are? Can analyzing our digital footprints help us better understand ourselves?
+
+Nouf.io is an installation that features a bot that will act as a copy of my digital self. She will be simulated from my online archives such as social media posts, Facebook messages, SMS interactions and more. She will be my self-reflective and interactive bot whose answers I can analyze to get a better picture of myself. 
 
 [In Progress for Thesis]
