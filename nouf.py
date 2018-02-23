@@ -3,8 +3,8 @@ from chatterbot import ChatBot
 #from chatterbot.trainers import ChatterBotCorpusTrainer
 from chatterbot.trainers import ListTrainer
 
-conv = open('./data/chat.txt','r').readlines()
-me = open('./data/me.txt','r').readlines()
+conv = open('./corpus/chat.txt','r').readlines()
+me = open('./corpus/me.txt','r').readlines()
 
 # Create a new instance of a ChatBot
 # nouf = ChatBot(
