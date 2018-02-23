@@ -70,10 +70,12 @@ for sentences in list_sentences.items():
         #print words
         #print num
         for word in words:
-            if word == '?':
+            if word == '?' and sentences[0] not in list_replace:
                 #print sentence
                 #list_replace.append(sentence)
-                list_replace[sentences[0]] = sentence
+                list_replace[sentences[0]] = sentence + " "
+            elif word == '?' and sentences[0] in list_replace:
+                list_replace[sentences[0]] += sentence + " "
 #print list_replace
 
 for index in list_replace.items():
