@@ -2,9 +2,12 @@
 from chatterbot import ChatBot
 #from chatterbot.trainers import ChatterBotCorpusTrainer
 from chatterbot.trainers import ListTrainer
+import os
 
-conv = open('./corpus/chat.txt','r').readlines()
-me = open('./corpus/me.txt','r').readlines()
+files = os.listdir("corpus/")
+
+# conv = open('./corpus/chat.txt','r').readlines()
+# me = open('./corpus/me.txt','r').readlines()
 
 # Create a new instance of a ChatBot
 # nouf = ChatBot(
@@ -48,17 +51,23 @@ nouf = ChatBot(
 #nouf.set_trainer(ChatterBotCorpusTrainer)
 nouf.set_trainer(ListTrainer)
 
-nouf.train(
-conv
-    #"chatterbot.corpus.english.testing"
-    #"./data/convert.txt",
-)
+for f in files:
+    data = open('corpus/' + f,'r').readlines()
+    nouf.train(
+        data
+    )
 
-nouf.train(
-    me
-    #"chatterbot.corpus.english.me"
-    #"./data/convert.txt",
-)
+# nouf.train(
+# conv
+#     #"chatterbot.corpus.english.testing"
+#     #"./data/convert.txt",
+# )
+#
+# nouf.train(
+#     me
+#     #"chatterbot.corpus.english.me"
+#     #"./data/convert.txt",
+# )
 
 while True:
    try:
