@@ -4,7 +4,7 @@ messages/
 node_modules/
 corpus/
 whatsapp-corpus/
-whatsapp-corpus _2/
+whatsapp-corpus_2/
 whatsapp-corpus_before concatenation/
 whatsapp-messages/
 env/
