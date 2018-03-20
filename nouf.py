@@ -42,7 +42,7 @@ nouf = ChatBot(
        {
            'import_path': 'chatterbot.logic.LowConfidenceAdapter',
            'threshold': 0.80,
-           'default_response': 'I am sorry, but I do not contain this in my memory'
+           'default_response': 'lol'
        }
    ],
    input_adapter="chatterbot.input.TerminalAdapter",
