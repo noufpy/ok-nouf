@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
-### IMPORTS
-from __future__ import unicode_literals
+from bottle import Bottle, run, static_file, request, abort
+# from __future__ import unicode_literals
 import spacy
 import numpy as np
 from numpy import dot
@@ -8,7 +8,7 @@ from numpy.linalg import norm
 import sys
 import os
 
-print("Nouf.io--")
+# print("Nouf.io--")
 
 ### FUNCTION DEFINITIONS
 #returning vector points for each word. Basically drawing it on euclidean graph
@@ -52,7 +52,7 @@ def spacy_closest_sent(space, input_str, n=10):
 def analyzeInput(user_question):
     # question analysis
     new = []
-    user_question = unicode(user_question, 'utf-8')
+    #user_question = unicode(user_question, 'utf-8')
     for sent in spacy_closest_sent(questions, user_question):
         new.append(sent.text)
     # response printing
@@ -63,13 +63,14 @@ def analyzeInput(user_question):
         #print "options: ", find
         #index = questions_str.index[now]
         # print index
-        print find[0][1]
+        # print find[0][1]
+        return find[0][1]
         #print answers[index]
         del new[:]
 
 
 ### INITIALIZATIONS
-print("-- initializing")
+print("-- nouf.io initializing")
 questions = []
 questions_str = []
 answers = []
@@ -99,13 +100,56 @@ for f in files:
             questions_str.append((unicode(sentence, "utf-8"), (unicode(sentence_next, "utf-8"))))
             i+=2
 
+print("-- files loaded")
 ### QUESTIONCYCLE
-user_input = ""
-while(user_input != 'Q'):
-    user_input = raw_input("Ask Nouf.io something: ")
-    # print(type(user_input))
-    # user_input = str(user_input)
-    if user_input == "quit":
-        break
-    else:
-        analyzeInput(user_input)
+# user_input = ""
+# while(user_input != 'Q'):
+#     user_input = raw_input("Ask Nouf.io something: ")
+#     # print(type(user_input))
+#     # user_input = str(user_input)
+#     if user_input == "quit":
+#         break
+#     else:
+#         analyzeInput(user_input)
+
+app = Bottle()
+
+@app.route('/websocket')
+def handle_websocket():
+    wsock = request.environ.get('wsgi.websocket')
+    if not wsock:
+        abort(400, 'Expected WebSocket request.')
+    #always running socket in while loop until you close client
+    while True:
+        try:
+            #receive socket
+            message = wsock.receive()
+            if message:
+                print "User: ", message
+                answer = analyzeInput(message)
+                print "Nouf.io: ", answer
+                #send socket
+                wsock.send(answer)
+        except WebSocketError:
+            break
+
+#serving index.html file
+@app.route('/')
+def server_static():
+    return static_file('landing.html', root='/Users/noufaljowaysir/github/ok-nouf/static/')
+
+#serving all files in folder 'static'
+@app.route('/<filename:path>')
+def send_static(filename):
+    return static_file(filename, root='/Users/noufaljowaysir/github/ok-nouf/static/')
+
+#attaching socket to server
+from gevent.pywsgi import WSGIServer
+from geventwebsocket import WebSocketError
+from geventwebsocket.handler import WebSocketHandler
+server = WSGIServer(("localhost", 8050), app,
+                    handler_class=WebSocketHandler)
+print("-- server started")
+server.serve_forever()
+
+#run(app, host='localhost', port=8050)

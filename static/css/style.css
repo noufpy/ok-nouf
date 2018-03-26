@@ -1,0 +1,116 @@
+body {
+	font-family: 'Roboto Mono', monospace;
+	font-size: 30px;
+	color: black;
+	background-color: pink;
+	margin-left: 320px;
+	margin-top: 50px;
+}
+#me {
+	width: 70%;
+}
+#title {
+	margin-bottom:0px;
+}
+#bubble {
+	/* background-color: white; */
+	padding: 0px;
+	font-size: 16px;
+	width: 70%;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	margin-bottom: 20px;
+	height: 25px;
+	align-items: flex-end;
+}
+#bubble2 {
+	/* background-color: white; */
+	font-size: 16px;
+	width: 82.8%;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	margin-top: 20px;
+}
+#box {
+	margin-left: 10px;
+  background-color: #DD5646;
+	width: 80%;
+	min-height: 10px;
+	font-size: 16px;
+  display: block;
+  border: solid 2px #DD5646;
+	border-radius: 10px;
+  box-sizing: border-box;
+  overflow: hidden;
+  padding: 8px;
+  vertical-align: top;
+  word-wrap: break-word;
+  -webkit-line-break: after-white-space;
+  /* direction: ltr; */
+  unicode-bidi: isolate;
+  -webkit-user-modify: read-write;
+	cursor:text;
+}
+
+#box2 {
+	margin-left: 10px;
+  background-color: white;
+	width: 75%;
+	min-height: 100px;
+	font-size: 16px;
+  display: block;
+	border-radius: 10px;
+  box-sizing: border-box;
+  overflow: hidden;
+  padding: 8px;
+  vertical-align: top;
+  word-wrap: break-word;
+  -webkit-line-break: after-white-space;
+  /* direction: ltr; */
+  unicode-bidi: isolate;
+  /* -webkit-user-modify: read-write; */
+}
+div[data-placeholder]:not([data-div-placeholder-content]):before {
+    content: attr(data-placeholder);
+    /* color: #aab8c2; */
+		opacity:0.7;
+		color: pink;
+    font-size: 14px;
+    position: absolute;
+}
+
+div:focus {
+  outline: 0px solid transparent;
+  /* border: solid 4px #DD5646; */
+}
+
+#button{
+	margin-left:10px;
+	height: 40px;
+  background-color: #DD5646;
+	font-family: 'Roboto Mono', monospace;
+  color: white;
+  border-radius: 10px;
+  box-shadow: none;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 20px;
+  padding: 6px 16px;
+  position: relative;
+  text-align: right;
+  white-space: nowrap;
+  border-style: none;
+}
+
+#button:focus {
+  outline: 0px solid transparent;
+  /* border: solid 4px #DD5646; */
+}
+
+#button:hover:enabled {
+  /* background: #1da1f2; */
+	box-shadow: 5px 5px #BDBDBD;
+  cursor: pointer;
+}

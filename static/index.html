@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<title> nouf.io </title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.socket.io/socket.io-1.7.3.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Roboto+Mono:300,500" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<body>
+	<div id="title">
+		<p> This is nouf.io's personal space </p>
+	</div>
+	<div id="bubble">
+		<p>You:</p>
+		<div id="box" contenteditable="true" spellcheck="true" role="textbox" aria-multiline="true" data-placeholder="Talk to Nouf.io or not" dir="ltr" aria-autocomplete="list" aria-expanded="false" aria-owns="typeahead-dropdown-4" readonly>
+		</div>
+		<input id="button" type="submit" value="Submit" </input>
+	</div>
+	<img id="me" src="img/me.png">
+	<div id="container">
+		<div id="bubble2">
+			<p>nouf.io:</p>
+			<div id="box2" contenteditable="false" spellcheck="true" role="textbox" aria-multiline="true" data-placeholder=":)" dir="ltr" aria-autocomplete="list" aria-expanded="false" aria-owns="typeahead-dropdown-4">
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="js/nouf.js"></script>
+</html>
