@@ -3,8 +3,9 @@
 messages/
 node_modules/
 corpus/
+testing/
 whatsapp-corpus/
-whatsapp-corpus_2/
+whatsapp-corpus_after concatenation/
 whatsapp-corpus_before concatenation/
-whatsapp-messages/
+whatsapp-messages_original/
 env/
