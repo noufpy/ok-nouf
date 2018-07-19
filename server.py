@@ -9,23 +9,23 @@ import os
 
 print("Nouf.io--")
 
-### FUNCTION DEFINITIONS
-#returning vector points for each word. Basically drawing it on euclidean graph
+### FUNCTION DEFINITIONS 
+# assigning words given a vector point. Basically drawing it on euclidean graph
 def vec(s):
     return nlp.vocab[s].vector
 
-#cosine similarity between two vectors
+# cosine similarity between two vectors (two words)
 def cosine(v1, v2):
     if(norm(v1) > 0 and norm(v2) > 0):
         return dot(v1, v2) / (norm(v1) * norm(v2))
     else:
         return 0.0
 
-# closest word
+# returning closest word
 def spacy_closest(token_list, vec_to_check, n=10):
     return sorted(token_list, key=lambda x: cosine(vec_to_check, vec(x)), reverse=True)[:n]
 
-# sentence vector
+# returning vector point for sentence. Taking the average of the vector points for each word in the sentence
 def sentvec(s):
     sent = nlp(s)
     return meanv([w.vector for w in sent])
@@ -42,7 +42,7 @@ def meanv(coords):
         mean[i] = float(sumv[i]) / len(coords)
     return mean
 
-# closest sentence
+# returning closest sentence 
 def spacy_closest_sent(space, input_str, n=10):
     input_vec = sentvec(input_str)
     return sorted(space, key=lambda x: cosine(np.mean([w.vector for w in x], axis=0), input_vec), reverse=True)[:n]
@@ -100,7 +100,8 @@ for f in files:
             i+=2
 
 print("-- files loaded")
-### QUESTIONCYCLE
+
+### QUESTIONCYCLE - terminal testing 
 # user_input = ""
 # while(user_input != 'Q'):
 #     user_input = raw_input("Ask Nouf.io something: ")
@@ -122,18 +123,19 @@ def handle_websocket():
     #always running socket in while loop until you close client
     while True:
         try:
-            #receive socket
+            #receive socket - receiving input/question from user and sending it to server to conduct vector math 
             message = wsock.receive()
             if message:
                 print "User: ", message
+                # analyzing vector points for sentence 
                 answer = analyzeInput(message)
                 print "Nouf.io: ", answer
-                #send socket
+                #after analyzing closest vector point, it sends socket with the answer to the client 
                 wsock.send(answer)
         except WebSocketError:
             break
 
-#serving index.html file
+#serving html file
 @app.route('/')
 def server_static():
     return static_file('landing.html', root='/Users/noufaljowaysir/github/ok-nouf/static/')
@@ -151,5 +153,3 @@ server = WSGIServer(("localhost", 8050), app,
                     handler_class=WebSocketHandler)
 print("-- server started")
 server.serve_forever()
-
-#run(app, host='localhost', port=8050)
