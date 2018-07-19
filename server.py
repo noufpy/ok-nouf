@@ -1,6 +1,5 @@
 # -*- coding: UTF-8 -*-
 from bottle import Bottle, run, static_file, request, abort
-# from __future__ import unicode_literals
 import spacy
 import numpy as np
 from numpy import dot
@@ -8,7 +7,7 @@ from numpy.linalg import norm
 import sys
 import os
 
-# print("Nouf.io--")
+print("Nouf.io--")
 
 ### FUNCTION DEFINITIONS
 #returning vector points for each word. Basically drawing it on euclidean graph
@@ -112,8 +111,9 @@ print("-- files loaded")
 #     else:
 #         analyzeInput(user_input)
 
+### INITIALIZING SERVER
 app = Bottle()
-
+# socket connection
 @app.route('/websocket')
 def handle_websocket():
     wsock = request.environ.get('wsgi.websocket')
