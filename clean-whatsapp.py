@@ -4,11 +4,10 @@ import os
 import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
-
 links = []
 
+### CLEANING WHATSAPP FILES FROM YOUTUBE LINKS, SYMBOLS, FILE EXTENSIONS ETC
 files = os.listdir("whatsapp-corpus/")
-#print files
 
 for f in files:
     list_sentences = {}
@@ -21,19 +20,15 @@ for f in files:
 
     messages = encoded_messages
 
-    # CLEANING UP LINKS
-    # SAVING MY OWN LINKS IN A SEPARATE FILE
-
+    # extracting links from messages I have sent using regex and saving them in a seperate file
     for message in messages[1:len(messages):2]:
-        #url = '(http[s]?://[\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?'
         url = 'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[\w.,@?^=%&:/~+#-][\w@?^=%&/~+#-]))+'
         find = re.findall(url, message)
         if find:
             links.append(str(find) + '\n')
-    #print links
-
+    
+    # extracting links sent to me using regex and removing them
     for message in messages:
-        #url = '(http|ftp|https)://([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?'
         url = 'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-]))+'
         find = re.findall(url, message)
         if find:    # only do this for question lines... OkNouf can reply links
@@ -44,22 +39,18 @@ for f in files:
             messages.pop(i)
             messages.insert(i,message)
 
-    # CLEANING UP FILE EXTENSIONS
-
+    # extracting file extensions and removing them
     for message in messages:
-        #tag = "([-\w]+\.(?:jpg|gif|png|mp4|pdf))"
         tag = "[-\w]+.(?:jpg|gif|png|mp4|pdf|opus)+(.*?)\>"
         extension = re.findall(tag, message)
         if extension:
-            #print find
             i = messages.index(message)
             new = re.sub(tag, '', message)
             message = new
             messages.pop(i)
             messages.insert(i,message)
 
-    # CLEANING UP DATE AND NAME STAMP
-
+    # extracting date and time stamps
     for message in messages:
         tag = "\[(.*?)\: "
         find = re.findall(tag, message)
@@ -71,12 +62,9 @@ for f in files:
             messages.pop(i)
             messages.insert(i,message)
 
-    # FINDING QUESTIONS
-
+    # Using NLTK, extracting questions sent to me
     for message in messages[::2]:
-        #print message
         list_sentences[messages.index(message)] = nltk.sent_tokenize(message)
-        #list_sentences.append(nltk.sent_tokenize(message))
 
     #print list_sentences
 
@@ -97,15 +85,16 @@ for f in files:
                 elif word == '?' and sentences[0] in list_replace:
                     list_replace[sentences[0]] += sentence + " "
     #print list_replace
-
+    #replacing those sentences with just the question asked
     for index in list_replace.items():
         #print index[0]
         messages.pop(index[0])
         messages.insert(index[0],index[1]+ '\n')
-
+    #rewriting file with cleaned version
     with open("whatsapp-corpus/" + f, 'w') as file:
         file.writelines( messages )
         print "finished cleaning up"
-
+        
+#saving links extracted to another file 
 with open("links/whatsapp-links.txt", 'w') as file:
     file.writelines( links )
