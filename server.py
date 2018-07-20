@@ -9,6 +9,7 @@ import os
 
 print("Nouf.io--")
 
+### FINDING WORD VECTORS AND SEMANTIC SIMILARITY
 ### FUNCTION DEFINITIONS 
 # assigning words given a vector point. Basically drawing it on euclidean graph
 def vec(s):
