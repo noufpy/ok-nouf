@@ -84,17 +84,17 @@ for f in files:
                     list_replace[sentences[0]] = sentence + " "
                 elif word == '?' and sentences[0] in list_replace:
                     list_replace[sentences[0]] += sentence + " "
-    #print list_replace
-    #replacing those sentences with just the question asked
+   
+    # replacing those sentences with just the question asked
     for index in list_replace.items():
         #print index[0]
         messages.pop(index[0])
         messages.insert(index[0],index[1]+ '\n')
-    #rewriting file with cleaned version
+    # rewriting file with cleaned version
     with open("whatsapp-corpus/" + f, 'w') as file:
         file.writelines( messages )
         print "finished cleaning up"
         
-#saving links extracted to another file 
+# saving links extracted to another file 
 with open("links/whatsapp-links.txt", 'w') as file:
     file.writelines( links )
