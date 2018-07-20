@@ -11,7 +11,7 @@ print("Nouf.io--")
 
 ### FINDING WORD VECTORS AND SEMANTIC SIMILARITY
 ### FUNCTION DEFINITIONS 
-# assigning words given a vector point. Basically drawing it on euclidean graph
+# assigning a vector point to a a word. Basically drawing it on euclidean graph
 def vec(s):
     return nlp.vocab[s].vector
 
