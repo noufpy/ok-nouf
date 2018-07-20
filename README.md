@@ -1,4 +1,5 @@
 # ok-nouf or Nouf.io
+[Thesis Project]
 
 <img width="956" alt="me" src="https://user-images.githubusercontent.com/22034616/42977622-402b45d4-8b96-11e8-9010-83b58727320e.png">
 
@@ -10,4 +11,6 @@ On a broader level, she is a character representative of my data and its categor
 
 Serving as both a self-reflective piece and a commentary, I want users to interact with Nouf.io in order to push the boundaries of privacy and accessibility to my information. Depending on the identity of the user and the amount of interactions we have had via text and Facebook, Nouf.io discloses private information based on our level of digital intimacy. In the same manner that data is passed around online between Facebook and Google, what if I just handed it out and made it available to you? What does it feel like to get to know me if you have never met me? Does her honesty and raw information make you feel uncomfortable?  
  
- [Thesis Project]
+### Tools Used
+ 
+Python, NLTK, spaCy, Bottle, Chatterbot, HTML/CSS, javascript, jQuery
