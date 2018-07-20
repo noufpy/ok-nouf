@@ -1,6 +1,6 @@
-# ok-nouf
+# ok-nouf or Nouf.io
 
-<img width="867" alt="me" src="https://user-images.githubusercontent.com/22034616/37887346-39d4093a-308f-11e8-96ea-5f3d33c53319.png">
+<img width="956" alt="me" src="https://user-images.githubusercontent.com/22034616/42977622-402b45d4-8b96-11e8-9010-83b58727320e.png">
 
 What information is collected about me online? Can I recreate another version of myself based on who this data describes?
 
