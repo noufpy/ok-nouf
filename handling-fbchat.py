@@ -9,21 +9,20 @@ new_files = []
 
 files = os.listdir("messages/")
 
-# EXTRACTING ONLY ONE-ON-ONE CONVERSATIONS WITH ME
-
+### CLEANING UP FACEBOOK MESSAGE CONVOS
+# first, extracting one-on-one conversations from corpus
 for f in files:
     data = json.load(open("messages/" + f))
     messages = data["threads"][0]["messages"]
-
+    
+    # analyzing how many messages in each convo
     if len(messages) > 1:
         for m in messages:
-            #print m
             who = messages[messages.index(m)]["sender"]
             if who not in senders:
                 senders.append(who)
-    #else:
-        #print f
-        #print "This contains only one message"
+
+    #if senders contain only two people (one is me) then extract file 
     if len(senders) == 2:
         for sender in senders:
             if senders[0] == "Nouf Aljowaysir" or senders[1] == "Nouf Aljowaysir":
@@ -42,8 +41,7 @@ for f in files:
 
 print new_files
 
-# CONVERTING EXTRACTED FILES TO TXT FILES AND CREATING A CORPUS
-
+# second, cleaning up extracted files and creating a new corpus 
 for f in new_files:
     data = json.load(open("messages/" + f))
     messages = data["threads"][0]["messages"]
@@ -51,9 +49,8 @@ for f in new_files:
     i = len(messages) - 1
 
     while i > -1:
-    	#msg = ''
+        # making Nouf messages on even numbers and other sender is on odd numbers. Concatening messages if from the same sender
     	who = messages[i]["sender"]
-        # making sure that Nouf messages are on even numbers and other sender is on odd numbers
         if messages[len(messages)-1]["sender"] == "Nouf Aljowaysir" and i == len(messages)-1:
             msg += "\n" + re.sub('\n', ' ', messages[i]["message"])
         else:
@@ -70,6 +67,7 @@ for f in new_files:
     	msg += "\n"
     	i -= 1
     #print(msg)
+    # rewriting messages into new corpus
     with open('./corpus/' + str(senders[0]) + '.txt','w') as f:
         f.write(msg)
         del senders[:]
