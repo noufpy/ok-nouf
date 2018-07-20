@@ -1,43 +1,21 @@
 #-*- coding: utf-8 -*-
 from chatterbot import ChatBot
-#from chatterbot.trainers import ChatterBotCorpusTrainer
 from chatterbot.trainers import ListTrainer
 import os
 
 files = os.listdir("corpus/")
 
-# conv = open('./corpus/chat.txt','r').readlines()
-# me = open('./corpus/me.txt','r').readlines()
-
-# Create a new instance of a ChatBot
-# nouf = ChatBot(
-#    "Nouf",
-#    storage_adapter="chatterbot.storage.SQLStorageAdapter",
-#    logic_adapters=[
-#        {
-#             'import_path': 'chatterbot.logic.BestMatch'
-#         },
-#         {
-#             'import_path': 'chatterbot.logic.LowConfidenceAdapter',
-#             'threshold': 0.90,
-#             'default_response': 'I am sorry, but I do not understand.'
-#         }
-#    ],
-#    input_adapter="chatterbot.input.TerminalAdapter",
-#    output_adapter="chatterbot.output.TerminalAdapter",
-#    #database="../database.db"
-# )
-
+### CHATTERBOT - untrained instance of chatbot
+# initializing chat bot 
 nouf = ChatBot(
    "Nouf",
    storage_adapter="chatterbot.storage.SQLStorageAdapter",
    logic_adapters=[
         {
-           #"chatterbot.logic.MathematicalEvaluation",
-           # "chatterbot.logic.TimeLogicAdapter",
-           #"chatterbot.logic.BestMatch"
+           "chatterbot.logic.MathematicalEvaluation",
+           "chatterbot.logic.TimeLogicAdapter",
            'import_path': 'chatterbot.logic.BestMatch'
-           #'default_response': 'I am sorry, but I do not contain this in my memory'
+           'default_response': 'I am sorry, but I do not contain this in my memory'
        },
        {
            'import_path': 'chatterbot.logic.LowConfidenceAdapter',
@@ -48,27 +26,18 @@ nouf = ChatBot(
    input_adapter="chatterbot.input.TerminalAdapter",
    output_adapter="chatterbot.output.TerminalAdapter"
 )
-#nouf.set_trainer(ChatterBotCorpusTrainer)
+
+# setting trainer for chatbot as list style 
 nouf.set_trainer(ListTrainer)
 
+# training chatbot on my data
 for f in files:
     data = open('corpus/' + f,'r').readlines()
     nouf.train(
         data
     )
-
-# nouf.train(
-# conv
-#     #"chatterbot.corpus.english.testing"
-#     #"./data/convert.txt",
-# )
-#
-# nouf.train(
-#     me
-#     #"chatterbot.corpus.english.me"
-#     #"./data/convert.txt",
-# )
-
+   
+# chatbot waiting for questions and giving responses
 while True:
    try:
 
