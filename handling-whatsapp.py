@@ -13,9 +13,9 @@ for f in files:
     msg = ''
     i = 0
 
-    # concacting starts here
+    # concatenating starts here
     while i < len(messages)-1:
-        # extract senders using regex
+        # extract sender using regex
         title = '\](.*?)\:'
         sender = re.findall(title, messages[i])
         #replace line breaks in messages with ' '
